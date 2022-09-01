@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <article class="singlearticle">
+      <img src="" alt="" class="billede singlebillede" />
+      <section>
+        <h2 class="navn"></h2>
+        <p class="kortbeskrivelse"></p>
+        <p class="oprindelsesregion"></p>
+        <p class="pris"></p>
+      </section>
+    </article>
+    <script>
+      const urlParams = new URLSearchParams(window.location.search);
+      let id = urlParams.get("id");
+      console.log({ id });
+
+      let ret;
+      const endpoint = "https://babushka-dd8a.restdb.io/rest/menu/" + id;
+      const option = {
+        headers: {
+          "x-apikey": "600ec2fb1346a1524ff12de4",
+        },
+      };
+
+      async function hentData() {
+        const response = await fetch(endpoint, option);
+        ret = await response.json();
+        console.log("ret", ret);
+        vis();
+      }
+
+      function vis() {
+        const singlearticle = document.querySelector("article");
+        console.log(singlearticle);
+        document.querySelector(".navn").textContent = ret.navn;
+        document.querySelector("img").src = "billeder/" + ret.billednavn + "-md.jpg";
+        document.querySelector(".kortbeskrivelse").textContent = ret.kortbeskrivelse;
+        document.querySelector(".oprindelsesregion").textContent = ret.oprindelsesregion;
+        document.querySelector(".pris").textContent = ret.pris + " DKK";
+      }
+      hentData();
+    </script>
+  </body>
+</html>
