@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>singleview</title>
   </head>
   <body>
     <article class="singlearticle">
@@ -14,6 +14,7 @@
         <p class="kortbeskrivelse"></p>
         <p class="oprindelsesregion"></p>
         <p class="pris"></p>
+        <button>tilbage</button>
       </section>
     </article>
     <script>
@@ -45,6 +46,11 @@
         document.querySelector(".oprindelsesregion").textContent = ret.oprindelsesregion;
         document.querySelector(".pris").textContent = ret.pris + " DKK";
       }
+      document.querySelector("button").addEventListener("click", tilbageTilPersonGalleri);
+      function tilbageTilPersonGalleri() {
+        history.back();
+      }
+
       hentData();
     </script>
   </body>
